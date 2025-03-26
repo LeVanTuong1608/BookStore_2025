@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booktore</title>
+    <link rel="stylesheet" href="../frontend/css/main.css">
+    <link rel="stylesheet" href="../frontend/css/book.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><a href="../frontend/index.html">Bookstore</a></div>
+        <div class="search-box">
+            <input placeholder="Tìm kiếm sản phẩm..." type="text" id="search-input"/>
+            <button type="button" id="search-btn" title="Tìm kiếm"><i class="fas fa-search">Tìm kiếm</i></button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../frontend/index.html"><i class="fas fa-home"></i>Trang chủ</a></li>
+                <li ><a href="../frontend/products.html">Sản phẩm</a></li>
+                <li><a href="../frontend/cart.html"><i class="fas fa-shopping-cart"></i>Giỏ hàng</a></li>
+                <!-- <li><a href="../frontend/login.html"><i class="fas fa-user"></i>Đăng nhập</a></li> -->
+                <li id="auth-section">
+                    <div id="user-info" class="user-info">
+                        <span id="username-display"></span>
+                        <button id="logout-btn">Đăng xuất</button>
+                    </div>
+                    <a id="login-btn" href="../frontend/login.html"><i class="fas fa-user"></i>Đăng nhập</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="book-detail">
+        <div id="book-info">
+            <!-- Nội dung sách sẽ được load từ JavaScript -->
+        </div>
+        <button id="add-to-cart">Thêm vào giỏ hàng</button>
+        <button id="buy-now">Mua ngay</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h2 class="footer-title">BookStore</h2>
+                <p>Khu số 12, Trực Hưng, Trực Ninh, Nam Định</p>
+                <p>levtuong1608@gmail.com</p>
+            </div>
+    
+            <div class="footer-column">
+                <h3>SẢN PHẨM</h3>
+                <ul>
+                    <li><a href="../frontend/products.html">Văn học</a></li>
+                    <li><a href="../frontend/products.html">Tâm lý - Kỹ năng sống</a></li>
+                    <li><a href="../frontend/products.html">Công nghệ thông tin</a></li>
+                    <li><a href="../frontend/products.html">Kinh tế</a></li>
+                    <li><a href="../frontend/products.html">Sách khác</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-column">
+                <h3>DANH MỤC</h3>
+                <ul>
+                    <li><a href="../frontend/index.html">Trang chủ</a></li>
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="../frontend/products.html">Danh mục sản phẩm</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-column">
+                <h3>CHÍNH SÁCH</h3>
+                <ul>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li><a href="#">Chính sách vận chuyển</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../frontend/js/main.js"></script>
+    <script src="../frontend/js/book-detail.js"></script>
+
+</body>
+</html>

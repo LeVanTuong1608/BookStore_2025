@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="../admin/css/styles.css">
+    <link rel="stylesheet" href="../admin/css/users.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2 id="idbannerxx">BookStore</h2>
+        <ul>
+            <li><a href="../admin/index.html">Trang chủ</a></li>
+            <li><a href="../admin/books.html">Quản lý Sách</a></li>
+            <li><a href="../admin/add-book.html">Thêm Sách</a></li>
+            <li><a href="../admin/orders.html">Quản lý Đơn hàng</a></li>
+            <li class="at-location"><a href="../admin/users.html">Quản lý Người dùng</a></li>
+            <li><a href="../admin/promotions.html">Khuyến mãi</a></li>
+            <li><a href="../admin/author.html">Tác Giả</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <h2>Quản lý Khách Hàng</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tài Khoản</th>
+                    <th>Mật Khẩu</th>
+                    <th>Số Lượng Hàng Đã Mua</th>
+                    <th>Tổng Số Tiền Đã Thanh Toán</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="usersList">
+                <!-- Dữ liệu sách sẽ được render từ API -->
+            </tbody>
+        </table>
+    </div>
+    <script src="../admin/js/main.js"></script>
+    <script src="../admin/js/users.js"></script>
+</body>
+</html>

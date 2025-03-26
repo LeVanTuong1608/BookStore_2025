@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="../admin/css/styles.css">
+    <link rel="stylesheet" href="../admin/css/add-book.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2 id="idbannerxx">BookStore</h2>
+        <ul>
+            <li><a href="../admin/index.html">Trang chủ</a></li>
+            <li><a href="../admin/books.html">Quản lý Sách</a></li>
+            <li class="at-location"><a href="../admin/add-book.html">Thêm Sách</a></li>
+            <li><a href="../admin/orders.html">Quản lý Đơn hàng</a></li>
+            <li><a href="../admin/users.html">Quản lý Người dùng</a></li>
+            <li><a href="../admin/promotions.html">Khuyến mãi</a></li>
+            <li><a href="../admin/author.html">Tác Giả</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <h2>Thêm sách mới</h2>
+        <form id="addBookForm">
+            <label for="bookId">Mã sách:</label>
+            <input type="text" id="bookId" name="bookId" required>
+            
+            <label for="bookName">Tên sách:</label>
+            <input type="text" id="bookName" name="bookName" required>
+            
+            <label for="author">Tác giả:</label>
+            <select id="author" name="author">
+                <option value="">Select...</option>
+            </select>
+            
+            <label for="category">Thể loại:</label>
+            <select id="category" name="category">
+                <option value="">Select...</option>
+            </select>
+            
+            <label for="publisher">Nhà xuất bản:</label>
+            <select id="publisher" name="publisher">
+                <option value="">Select...</option>
+            </select>
+            
+            <label for="publishYear">Năm xuất bản:</label>
+            <input type="number" id="publishYear" name="publishYear">
+            
+            <label for="pageCount">Số trang:</label>
+            <input type="number" id="pageCount" name="pageCount">
+            
+            <label for="size">Kích thước:</label>
+            <input type="text" id="size" name="size">
+            
+            <label for="price">Giá bán:</label>
+            <input type="number" id="price" name="price" required>
+            
+            <label for="discount">Giảm giá:</label>
+            <input type="number" id="discount" name="discount" value="0">
+            
+            <label for="description">Mô tả:</label>
+            <textarea id="description" name="description"></textarea>
+            
+            <label for="bookImage">Hình ảnh:</label>
+            <input type="file" id="bookImage" name="bookImage" accept="image/*">
+            
+            <button type="submit">Thêm sách</button>
+        </form>
+    </div>
+    <script src="../admin/js/main.js"></script>
+    <script src="../admin/js/add-book.js"></script>
+</body>
+</html>

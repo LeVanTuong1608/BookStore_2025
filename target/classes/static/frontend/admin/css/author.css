@@ -1,0 +1,74 @@
+/* Sửa lại kích thước của content */
+.contents {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    min-height: 100vh;
+    margin-left: 250px; /* Để tránh bị đè bởi sidebar */
+    flex-grow: 1;
+    /* width: 800%; */
+    max-width: calc(95% - 250px); /* Để không bị bó hẹp */
+}
+/* Sửa phần bảng trong contents */
+.contents {
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Giữ nguyên các phần cũ */
+.contents table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+}
+
+.contents th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.contents th {
+    background: #2c3e50;
+    color: white;
+}
+
+.contents td img {
+    width: 50px;
+    height: 70px;
+    object-fit: cover;
+}
+
+/* Đảm bảo form căn chỉnh đúng */
+.content form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 300px;
+}
+
+.content input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.content .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+.content {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    min-height: 10vh;
+    height: 250px;
+    margin-left: 250px; /* Để tránh bị đè bởi sidebar */
+    flex-grow: 1;
+    /* width: 800%; */
+    max-width: calc(95% - 250px); /* Để không bị bó hẹp */
+}

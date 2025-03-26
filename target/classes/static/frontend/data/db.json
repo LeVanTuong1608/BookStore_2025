@@ -1,0 +1,34 @@
+{
+    "books": [
+      {
+        "id": 1,
+        "title": "Thiên Tài Bên Trái",
+        "author": "Endo Masakazu",
+        "year": 2021,
+        "description": "Cuốn sách này nói về thiên tài và những con người khác biệt.",
+        "price": 899999,
+        "discount": 10,
+        "image": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1630313960i/50908574.jpg"
+      },
+      {
+        "id": 2,
+        "title": "Làm gì - John Gray",
+        "author": "John Gray",
+        "year": 2019,
+        "description": "Một cuốn sách giúp bạn hiểu bản thân và lựa chọn đúng.",
+        "price": 160000,
+        "discount": 5,
+        "image": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1630313960i/50908574.jpg"
+      }
+    ],
+    "cart": [
+      {
+        "id": 1,
+        "title": "Thiên Tài Bên Trái",
+        "price": 899999,
+        "quantity": 1
+      }
+    ],
+    "payment": []
+  }
+  

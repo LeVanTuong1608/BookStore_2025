@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán</title>
+    <link rel="stylesheet" href="../frontend/css/main.css">
+    <link rel="stylesheet" href="../frontend/css/checkout.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo"><a href="../frontend/index.html">Bookstore</a></div>
+    </header>
+    <section class="checkout-container">
+        <h2>Thanh toán</h2>
+        <div id="book-info"></div>
+        <p><strong>Tổng tiền:</strong> <span id="checkout-total-price"></span></p>
+        <div id="qr-code">
+            <!-- Hiển thị mã QR để thanh toán -->
+        </div>
+        <button id="confirm-payment">Xác nhận thanh toán</button>
+        <button id="close-checkout">Thoát</button>
+    </section>
+
+
+    <script src="../frontend/js/checkout.js"></script>
+
+</body>
+</html>

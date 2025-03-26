@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="../admin/css/styles.css">
+    <link rel="stylesheet" href="../admin/css/promotions.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2 id="idbannerxx">BookStore</h2>
+        <ul>
+            <li><a href="../admin/index.html">Trang chủ</a></li>
+            <li><a href="../admin/books.html">Quản lý Sách</a></li>
+            <li><a href="../admin/add-book.html">Thêm Sách</a></li>
+            <li><a href="../admin/orders.html">Quản lý Đơn hàng</a></li>
+            <li><a href="../admin/users.html">Quản lý Người dùng</a></li>
+            <li class="at-location"><a href="../admin/promotions.html">Khuyến mãi</a></li>
+            <li><a href="../admin/author.html">Tác Giả</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <h2>Thêm mã giảm giá</h2>
+        <form id="addPromotionForm">
+            <label for="promoName">Tên mã giảm giá:</label>
+            <input type="text" id="promoName" name="promoName" required>
+            
+            <label for="promoCode">Code:</label>
+            <input type="text" id="promoCode" name="promoCode" required>
+            
+            <label for="bookId">Chọn sách áp dụng giảm giá:</label>
+            <select id="bookId" name="bookId">
+                <option value="">Chọn sách</option>
+                <!-- Các tùy chọn sách sẽ được thêm bằng JavaScript -->
+            </select>
+            <label for="discountAmount">Mức giảm:</label>
+            <input type="number" id="discountAmount" name="discountAmount" required>
+            
+            <label for="minSpend">Mức chi tối thiểu:</label>
+            <input type="number" id="minSpend" name="minSpend" required>
+            
+            <label for="startDate">Ngày bắt đầu:</label>
+            <input type="date" id="startDate" name="startDate" required>
+            
+            <label for="endDate">Ngày kết thúc:</label>
+            <input type="date" id="endDate" name="endDate" required>
+            
+            <div class="button-group">
+                <button type="submit" class="save-btn">Lưu</button>
+                <button type="button" class="cancel-btn">Hủy</button>
+            </div>
+        </form>
+    </div>
+    <div class="contents">
+        <h2>Quản Lý Mã Giảm Giá</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên mã giảm giá</th>
+                    <th>Mã code</th>
+                    <th>Tên sách áp dụng</th>
+                    <th>Mức chi tối thiểu</th>
+                    <th>Giảm</th>
+                    <th>Thời gian</th>
+                    <th>Hoạt động</th>
+                </tr>
+            </thead>
+            <tbody id="promotionList">
+                <!-- Dữ liệu sách sẽ được render từ API -->
+            </tbody>
+        </table>
+    </div>
+    <script src="../admin/js/main.js"></script>
+    <script src="../admin/js/promotions.js"></script>
+</body>
+</html>

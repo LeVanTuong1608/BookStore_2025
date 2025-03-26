@@ -1,0 +1,57 @@
+.content {
+    padding: 20px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+}
+
+/* Tiêu đề */
+.content h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Thêm box cho phần DOANH THU và SÁCH BÁN CHẠY */
+.box {
+    background: white;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Căn chỉnh dropdown */
+.filter {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.filter label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.filter select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Căn chỉnh biểu đồ */
+.chart-container {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Định dạng canvas để biểu đồ không bị méo */
+canvas {
+    width: 100% !important;
+    height: 300px !important;
+}

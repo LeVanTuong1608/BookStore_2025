@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="../admin/css/styles.css">
+    <link rel="stylesheet" href="../admin/css/home.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2 id="idbannerxx">BookStore</h2>
+        <ul>
+            <li class="at-location"><a href="../admin/index.html">Trang chủ</a></li>
+            <li><a href="../admin/books.html">Quản lý Sách</a></li>
+            <li><a href="../admin/add-book.html">Thêm Sách</a></li>
+            <li><a href="../admin/orders.html">Quản lý Đơn hàng</a></li>
+            <li><a href="../admin/users.html">Quản lý Người dùng</a></li>
+            <li><a href="../admin/promotions.html">Khuyến mãi</a></li>
+            <li><a href="../admin/author.html">Tác Giả</a></li>
+    </div>
+    <div class="content">
+        <h1>Tổng quan</h1>
+
+        <!-- Phần thống kê -->
+        <div class="dashboard">
+            <div class="chart-container">
+                <h2>DOANH THU</h2>
+                <label for="timeRange">Chọn khoảng thời gian:</label>
+                <select id="timeRange">
+                    <option value="all">Toàn thời gian</option>
+                    <option value="all">Năm Trước</option>
+                    <option value="month">Tháng này</option>
+                    <option value="week">Tuần này</option>
+                </select>
+                <canvas id="revenueChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <h2>SÁCH BÁN CHẠY</h2>
+                <canvas id="bestSellerChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script src="../admin/js/dashboard.js"></script>
+
+
+</body>
+</html>
