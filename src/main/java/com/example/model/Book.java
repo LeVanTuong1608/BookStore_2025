@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int bookId;
+    private long bookId;
 
     private String title;
     private String imageUrl;
@@ -36,11 +36,11 @@ public class Book {
     }
 
     // Getters và Setters
-    public int getBookId() {
+    public long getBookId() {
         return bookId;
     }
 
-    public void setBookId(int bookId) {
+    public void setBookId(long bookId) {
         this.bookId = bookId;
     }
 

@@ -1,48 +1,62 @@
 package com.example.controller;
 
+import com.example.dto.BookDTO;
 import com.example.model.Book;
 import com.example.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/api/books")
 public class BookController {
-    private final BookService bookService;
 
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
+    @Autowired
+    private BookService bookService;
 
-    // Lấy danh sách tất cả sách
     @GetMapping
-    public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
+    public ResponseEntity<List<Book>> getAllBooks() {
+        return ResponseEntity.ok(bookService.getAllBooks());
     }
 
-    // Lấy sách theo ID
     @GetMapping("/{id}")
-    public Optional<Book> getBookById(@PathVariable int id) {
-        return bookService.getBookById(id);
+    public ResponseEntity<Book> getBookById(@PathVariable long id) {
+        Book book = bookService.getBookById(id);
+        if (book != null) {
+            return ResponseEntity.ok(book);
+        }
+        return ResponseEntity.notFound().build();
     }
 
-    // Thêm sách mới
+    @GetMapping("/title/{title}")
+    public ResponseEntity<Book> getBookByTitle(@PathVariable String title) {
+        Book book = bookService.getBookByTitle(title);
+        if (book != null) {
+            return ResponseEntity.ok(book);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping
-    public Book addBook(@RequestBody Book book) {
-        return bookService.addBook(book);
+    public ResponseEntity<Book> createBook(@RequestBody BookDTO bookDTO) {
+        Book created = bookService.createBook(bookDTO);
+        return ResponseEntity.ok(created);
     }
 
-    // Cập nhật sách
     @PutMapping("/{id}")
-    public Book updateBook(@PathVariable int id, @RequestBody Book book) {
-        return bookService.updateBook(id, book);
+    public ResponseEntity<Book> updateBook(@PathVariable long id, @RequestBody BookDTO bookDTO) {
+        Book updated = bookService.updateBook(id, bookDTO);
+        if (updated != null) {
+            return ResponseEntity.ok(updated);
+        }
+        return ResponseEntity.notFound().build();
     }
 
-    // Xóa sách
     @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable int id) {
+    public ResponseEntity<Void> deleteBook(@PathVariable long id) {
         bookService.deleteBook(id);
+        return ResponseEntity.noContent().build();
     }
 }

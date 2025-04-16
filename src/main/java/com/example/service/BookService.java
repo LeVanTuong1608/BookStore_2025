@@ -1,48 +1,20 @@
 package com.example.service;
 
+import com.example.dto.BookDTO;
 import com.example.model.Book;
-import com.example.repository.BookRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class BookService {
-    private final BookRepository bookRepository;
+public interface BookService {
+    List<Book> getAllBooks();
 
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+    Book getBookById(long id);
 
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
-    }
+    Book getBookByTitle(String title);
 
-    public Optional<Book> getBookById(int id) {
-        return bookRepository.findById(id);
-    }
+    Book createBook(BookDTO bookDTO);
 
-    public Book addBook(Book book) {
-        return bookRepository.save(book);
-    }
+    Book updateBook(long id, BookDTO bookDTO);
 
-    public Book updateBook(int id, Book updatedBook) {
-        return bookRepository.findById(id).map(book -> {
-            book.setTitle(updatedBook.getTitle());
-            book.setImageUrl(updatedBook.getImageUrl());
-            book.setCategory(updatedBook.getCategory());
-            book.setPrice(updatedBook.getPrice());
-            book.setAuthorId(updatedBook.getAuthorId());
-            book.setDescription(updatedBook.getDescription());
-            book.setPublisher(updatedBook.getPublisher());
-            book.setPublicationYear(updatedBook.getPublicationYear());
-            book.setDimensions(updatedBook.getDimensions());
-            return bookRepository.save(book);
-        }).orElse(null);
-    }
-
-    public void deleteBook(int id) {
-        bookRepository.deleteById(id);
-    }
+    void deleteBook(long id);
 }

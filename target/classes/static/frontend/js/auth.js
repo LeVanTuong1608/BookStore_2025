@@ -21,7 +21,7 @@ function checkLoginStatus() {
 function login(username, password) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (username === 'admin' && password === '123456') {
+      if (username === 'levtuong1608@gmail.com' && password === '12345688') {
         resolve({ username });
       } else {
         reject(new Error('Sai tài khoản hoặc mật khẩu!'));
