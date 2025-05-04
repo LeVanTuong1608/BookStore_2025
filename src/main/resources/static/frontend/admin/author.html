@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="../admin/css/styles.css">
+    <link rel="stylesheet" href="../admin/css/author.css"
+</head>
+<body>
+    <div class="sidebar">
+        <h2 id="idbannerxx">BookStore</h2>
+        <ul>
+            <li><a href="../admin/index.html">Trang chủ</a></li>
+            <li><a href="../admin/books.html">Quản lý Sách</a></li>
+            <li><a href="../admin/add-book.html">Thêm Sách</a></li>
+            <li><a href="../admin/orders.html">Quản lý Đơn hàng</a></li>
+            <li><a href="../admin/users.html">Quản lý Người dùng</a></li>
+            <li><a href="../admin/promotions.html">Khuyến mãi</a></li>
+            <li class="at-location"><a href="../admin/author.html">Tác Giả</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <h2>Thêm Tác Giả</h2>
+        <form id="addPromotionForm">
+            <label for="promoName">Tên Tác Giả:</label>
+            <input type="text" id="promoName" name="promoName" required>
+            <label for="startDate">Ngày Sinh:</label>
+            <input type="date" id="startDate" name="startDate" required>
+            <div class="button-group">
+                <button type="submit" class="save-btn">Lưu</button>
+                <button type="button" class="cancel-btn">Hủy</button>
+            </div>
+        </form>
+    </div>
+    <div class="contents">
+        <h2>Quản lý Tác Giả</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên Tác Giả</th>
+                    <!-- <th>Số Lượng Tác Phẩm</th> -->
+                    <th>Ngày Sinh</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="authorList">
+                <!-- Dữ liệu sách sẽ được render từ API -->
+            </tbody>
+        </table>
+    </div>
+    <script src="../admin/js/main.js"></script>
+    <script src="../admin/js/author.js"></script>
+</body>
+</html>

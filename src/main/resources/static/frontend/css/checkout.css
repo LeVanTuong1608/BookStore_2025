@@ -1,0 +1,91 @@
+/* Định dạng chung */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header */
+header {
+    width: 100%;
+    background-color:white;
+    padding: 15px;
+    text-align: center;
+}
+
+.logo a {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Container chính */
+.checkout-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Tiêu đề */
+.checkout-container h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Thông tin sách */
+#book-info {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+#checkout-total-price {
+    font-size: 20px;
+    color: red;
+    font-weight: bold;
+}
+
+/* QR Code */
+#qr-code img {
+    width: 200px;
+    height: 200px;
+    margin-top: 10px;
+}
+
+/* Nút bấm */
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#confirm-payment {
+    background-color: #28a745;
+    color: white;
+}
+
+#confirm-payment:hover {
+    background-color: #218838;
+}
+
+#close-checkout {
+    background-color: #dc3545;
+    color: white;
+}
+
+#close-checkout:hover {
+    background-color: #c82333;
+}
