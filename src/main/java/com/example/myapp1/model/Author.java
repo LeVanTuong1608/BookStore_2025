@@ -3,7 +3,7 @@ package com.example.myapp1.model;
 
 import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
+import java.util.*;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,6 +18,9 @@ public class Author {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Book> books; // Liên kết với các Book, khi xóa Author thì xóa cả Book
 
     public Author() {
     }

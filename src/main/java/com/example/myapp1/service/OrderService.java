@@ -1,95 +1,229 @@
 package com.example.myapp1.service;
 
 import com.example.myapp1.dto.OrderDTO;
+import com.example.myapp1.exception.NotFoundException;
 import com.example.myapp1.model.Discount;
 import com.example.myapp1.model.Order;
 import com.example.myapp1.model.User;
 import com.example.myapp1.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 @Transactional
 public class OrderService {
 
-    @Autowired
-    private OrderRepository orderRepository;
+    private static final String ORDER_NOT_FOUND = "Không tìm thấy đơn hàng với ID: ";
+    private static final String USER_NOT_FOUND = "Không tìm thấy người dùng với ID: ";
+    private static final String DISCOUNT_NOT_FOUND = "Không tìm thấy mã giảm giá với ID: ";
+
+    private final OrderRepository orderRepository;
+    private final UserService userService;
+    private final DiscountService discountService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private DiscountService discountService;
-
-    // Lấy tất cả đơn hàng
-    public List<OrderDTO> getAllOrders() {
-        return orderRepository.findAll().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+    public OrderService(OrderRepository orderRepository,
+            UserService userService,
+            DiscountService discountService) {
+        this.orderRepository = orderRepository;
+        this.userService = userService;
+        this.discountService = discountService;
     }
 
-    // Lấy đơn hàng theo ID
+    public Page<OrderDTO> getAllOrders(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("orderDate").descending());
+        return orderRepository.findAll(pageable).map(this::convertToDTO);
+    }
+
     public OrderDTO getOrderById(int id) {
         return orderRepository.findById(id)
                 .map(this::convertToDTO)
-                .orElse(null);
+                .orElseThrow(() -> new NotFoundException(ORDER_NOT_FOUND + id));
     }
 
-    // Tạo đơn hàng mới
     public OrderDTO createOrder(OrderDTO orderDTO) {
         Order order = convertToEntity(orderDTO);
+        // order.setOrderDate(LocalDateTime.now()); // Tự động thêm ngày đặt hàng
+        // order.setOrderDate();
+        if (order.getOrderDate() == null) {
+            order.setOrderDate(new Date()); // Set current date if not provided
+        }
         Order savedOrder = orderRepository.save(order);
         return convertToDTO(savedOrder);
     }
 
-    // Cập nhật thông tin đơn hàng
+    // public OrderDTO updateOrder(int id, OrderDTO orderDTO) {
+    // return orderRepository.findById(id)
+    // .map(existingOrder -> {
+    // Order order = convertToEntity(orderDTO);
+    // order.setOrderId(id);
+    // return convertToDTO(orderRepository.save(order));
+    // })
+    // .orElseThrow(() -> new NotFoundException(ORDER_NOT_FOUND + id));
+    // }
+
     public OrderDTO updateOrder(int id, OrderDTO orderDTO) {
         return orderRepository.findById(id)
                 .map(existingOrder -> {
-                    Order order = convertToEntity(orderDTO);
-                    order.setOrderId(id);
-                    Order updatedOrder = orderRepository.save(order);
-                    return convertToDTO(updatedOrder);
+                    updateEntityFromDTO(existingOrder, orderDTO);
+                    return convertToDTO(orderRepository.save(existingOrder));
                 })
-                .orElse(null);
+                .orElseThrow(() -> new NotFoundException(ORDER_NOT_FOUND + id));
     }
 
-    // Xóa đơn hàng
+    private void updateEntityFromDTO(Order existingOrder, OrderDTO orderDTO) {
+        if (orderDTO.getUserId() != null) {
+            User user = userService.getUserEntityById(orderDTO.getUserId())
+                    .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND + orderDTO.getUserId()));
+            existingOrder.setUser(user);
+        }
+
+        if (orderDTO.getOrderDate() != null) {
+            existingOrder.setOrderDate(orderDTO.getOrderDate());
+        }
+
+        if (orderDTO.getTotalAmount() != null) {
+            existingOrder.setTotalAmount(orderDTO.getTotalAmount());
+        }
+
+        if (orderDTO.getStatus() != null) {
+            existingOrder.setStatus(orderDTO.getStatus());
+        }
+
+        if (orderDTO.getDiscountId() != null) {
+            Discount discount = discountService.getDiscountEntityById(orderDTO.getDiscountId());
+            if (discount == null) {
+                throw new NotFoundException(DISCOUNT_NOT_FOUND + orderDTO.getDiscountId());
+            }
+            existingOrder.setDiscount(discount);
+        } else {
+            existingOrder.setDiscount(null);
+        }
+    }
+
+    // public OrderDTO updateOrderStatus(int id, String status) {
+    // return orderRepository.findById(id)
+    // .map(order -> {
+    // order.setStatus(status);
+    // return convertToDTO(orderRepository.save(order));
+    // })
+    // .orElseThrow(() -> new NotFoundException(ORDER_NOT_FOUND + id));
+    // }
+    public OrderDTO updateOrderStatus(int id, OrderDTO.StatusRequest statusRequest) {
+        return orderRepository.findById(id)
+                .map(order -> {
+                    order.setStatus(statusRequest.getStatus());
+                    return convertToDTO(orderRepository.save(order));
+                })
+                .orElseThrow(() -> new NotFoundException(ORDER_NOT_FOUND + id));
+    }
+
     public void deleteOrder(int id) {
+        if (!orderRepository.existsById(id)) {
+            throw new NotFoundException(ORDER_NOT_FOUND + id);
+        }
         orderRepository.deleteById(id);
     }
 
-    // Chuyển đổi từ Order sang OrderDTO
     private OrderDTO convertToDTO(Order order) {
-        return new OrderDTO(
-                order.getOrderId(),
-                order.getUser().getUserid(), // Lấy userId từ User
-                order.getUser().getFullname(), // Lấy fullName từ User
-                order.getOrderDate(),
-                order.getTotalAmount(),
-                order.getStatus(),
-                order.getDiscount() != null ? order.getDiscount().getDiscountId() : null);
+        return OrderDTO.builder()
+                .orderId(order.getOrderId())
+                .userId(order.getUser().getUserid())
+                .fullName(order.getUser().getFullname())
+                .orderDate(order.getOrderDate())
+                .totalAmount(order.getTotalAmount())
+                .status(order.getStatus())
+                .discountId(order.getDiscount() != null ? order.getDiscount().getDiscountId() : null)
+                .build();
     }
 
-    // Chuyển đổi từ OrderDTO sang Order
     private Order convertToEntity(OrderDTO orderDTO) {
-        Order order = new Order();
-        User user = userService.getUserEntityById(orderDTO.getUserId()); // Lấy User từ userId
-        order.setUser(user);
+        User user = userService.getUserEntityById(orderDTO.getUserId())
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND + orderDTO.getUserId()));
 
+        Order order = new Order();
+        order.setUser(user);
         order.setOrderDate(orderDTO.getOrderDate());
         order.setTotalAmount(orderDTO.getTotalAmount());
         order.setStatus(orderDTO.getStatus());
 
-        // Gán Discount (nếu có)
         if (orderDTO.getDiscountId() != null) {
             Discount discount = discountService.getDiscountEntityById(orderDTO.getDiscountId());
+            if (discount == null) {
+                throw new NotFoundException(DISCOUNT_NOT_FOUND + orderDTO.getDiscountId());
+            }
+            // Discount discount =
+            // discountService.getDiscountEntityById(orderDTO.getDiscountId())
+            // .orElseThrow(() -> new NotFoundException(DISCOUNT_NOT_FOUND +
+            // orderDTO.getDiscountId()));
             order.setDiscount(discount);
         }
+
         return order;
     }
+
+    // Trong OrderService.java
+    // public Page<OrderDTO> getOrdersByUser(Long userId, int page, int size) {
+    // Pageable pageable = PageRequest.of(page, size,
+    // Sort.by("orderDate").descending());
+    // return orderRepository.findByUser_Id(userId,
+    // pageable).map(this::convertToDTO);
+    // }
+
+    // public Page<OrderDTO> getOrdersByUser(User user, int page, int size) {
+    // Pageable pageable = PageRequest.of(page, size,
+    // Sort.by("orderDate").descending());
+    // return orderRepository.findByUser(user, pageable)
+    // .map(this::convertToDTO);
+    // }
+
+    // trong OrderService
+    public Page<OrderDTO> getOrdersByUser(Long userId, int page, int size) {
+        User user = userService.getUserEntityById(userId)
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND + userId));
+        Pageable pageable = PageRequest.of(page, size, Sort.by("orderDate").descending());
+        return orderRepository.findByUser(user, pageable)
+                .map(this::convertToDTO);
+    }
+
+    // private Order updateEntityFromDTO(Order existingOrder, OrderDTO orderDTO) {
+    // if (orderDTO.getUserId() != null) {
+    // User user = userService.getUserEntityById(orderDTO.getUserId())
+    // .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND +
+    // orderDTO.getUserId()));
+    // existingOrder.setUser(user);
+    // }
+
+    // if (orderDTO.getOrderDate() != null) {
+    // existingOrder.setOrderDate(orderDTO.getOrderDate());
+    // }
+
+    // if (orderDTO.getTotalAmount() != null) {
+    // existingOrder.setTotalAmount(orderDTO.getTotalAmount());
+    // }
+
+    // if (orderDTO.getStatus() != null) {
+    // existingOrder.setStatus(orderDTO.getStatus());
+    // }
+
+    // if (orderDTO.getDiscountId() != null) {
+    // Discount discount =
+    // discountService.getDiscountEntityById(orderDTO.getDiscountId())
+    // .orElseThrow(() -> new NotFoundException(DISCOUNT_NOT_FOUND +
+    // orderDTO.getDiscountId()));
+    // existingOrder.setDiscount(discount);
+    // } else {
+    // existingOrder.setDiscount(null);
+    // }
+
+    // return existingOrder;
+    // }
 }

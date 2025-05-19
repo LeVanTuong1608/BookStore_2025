@@ -1,0 +1,206 @@
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #0056b3;
+    --background-color: #f9f9f9;
+    --text-color: #333;
+    --border-color: #ddd;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --radius: 8px;
+    --transition: all 0.3s ease;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+}
+/* Bố cục chính */
+.main-container {
+    display: flex;
+    gap: var(--spacing-md); /* Khoảng cách giữa sidebar và book-list */
+    max-width: 1200px;
+    margin: 0 auto; /* Căn giữa toàn bộ container */
+    padding: 0 var(--spacing-sm); /* Loại bỏ padding phía trên và dưới, chỉ để padding trái/phải */
+}
+
+/* Sidebar (Bộ lọc) */
+.sidebar {
+    width: 200px;
+    max-width: 215px;
+    padding: var(--spacing-md);
+    background: var(--background-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-left: 0; /* Đảm bảo sidebar sát lề trái */
+}
+
+/* Bộ lọc thể loại */
+.filter-category {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+}
+
+.filter-category li {
+    margin-bottom: var(--spacing-sm);
+}
+
+.filter-category input[type="checkbox"] {
+    margin-right: var(--spacing-sm);
+    cursor: pointer;
+}
+
+/* Danh sách sản phẩm */
+.book-list {
+    flex: 1;
+    padding: var(--spacing-md);
+}
+
+/* Container chứa sách */
+.books-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+/* Sản phẩm */
+.product-item {
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-sm);
+    text-align: center;
+    background: #fff;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease-in-out;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Ảnh sách */
+.product-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    max-width: 200px;
+    display: block;
+    margin: 0 auto var(--spacing-sm);
+    border-radius: 5px;
+}
+
+/* Tên sách */
+.product-item h4 {
+    font-size: 14px;
+    margin: 0 0 var(--spacing-sm);
+    color: var(--text-color);
+}
+
+/* Giá sách */
+.price {
+    color: #ff5733;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0 0 var(--spacing-sm);
+}
+
+.old-price {
+    font-size: 14px;
+    text-decoration: line-through;
+    color: gray;
+    margin: 0 0 var(--spacing-sm);
+}
+
+/* Nhãn giảm giá */
+.discount {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background: #66CC33;
+    color: white;
+    padding: var(--spacing-sm);
+    font-size: 12px;
+    border-radius: 50%;
+}
+
+/* Bộ lọc sản phẩm */
+.filter {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-sm);
+    background-color: var(--background-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.filter label {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.filter select {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter select:hover {
+    border-color: var(--primary-color);
+}
+
+.filter select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Phân trang */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--spacing-lg);
+}
+
+.pagination a {
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: 0 var(--spacing-sm);
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    border-radius: 5px;
+    color: black;
+    transition: background 0.3s;
+}
+
+.pagination a:hover {
+    background: var(--border-color);
+}
+
+.pagination a.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .book-list {
+        margin-left: 0;
+    }
+
+    .books-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}

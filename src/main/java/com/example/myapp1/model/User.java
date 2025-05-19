@@ -16,28 +16,40 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private String full_name;
+    @Column(name = "full_name", nullable = false)
+    private String fullname;
+    // private String full_name;
 
     @Column
     private String address;
 
-    @Column
-    private String phone_number;
+    @Column(name = "phone_number")
+    private String phonenumber;
+
+    @Column(nullable = false)
+    private String role = "customer";
 
     public User() {
     }
 
-    public User(String email, String password, String full_name, String address, String phone_number) {
+    public User(String email, String password, String fullname, String address, String phonenumber) {
         this.email = email;
         this.password = password;
-        this.full_name = full_name;
+        this.fullname = fullname;
         this.address = address;
-        this.phone_number = phone_number;
+        this.phonenumber = phonenumber;
     }
 
     public User(long userid) {
         this.userid = userid;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public long getUserid() {
@@ -65,11 +77,11 @@ public class User {
     }
 
     public String getFullname() {
-        return full_name;
+        return fullname;
     }
 
-    public void setFullname(String full_name) {
-        this.full_name = full_name;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getAddress() {
@@ -81,10 +93,10 @@ public class User {
     }
 
     public String getPhonenumber() {
-        return phone_number;
+        return phonenumber;
     }
 
-    public void setPhonenumber(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 }

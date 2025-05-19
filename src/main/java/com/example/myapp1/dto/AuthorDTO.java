@@ -17,6 +17,31 @@ public class AuthorDTO {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public static class Builder {
+        private long authorId;
+        private String authorName;
+        private LocalDate dateOfBirth;
+
+        public Builder authorId(long authorId) {
+            this.authorId = authorId;
+            return this;
+        }
+
+        public Builder authorName(String authorName) {
+            this.authorName = authorName;
+            return this;
+        }
+
+        public Builder dateOfBirth(LocalDate dateOfBirth) {
+            this.dateOfBirth = dateOfBirth;
+            return this;
+        }
+
+        public AuthorDTO build() {
+            return new AuthorDTO(authorId, authorName, dateOfBirth);
+        }
+    }
+
     public long getAuthorId() {
         return authorId;
     }

@@ -11,6 +11,7 @@ public class Discount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "discount_id")
     private int discountId;
 
     @Column(name = "discount_name", nullable = false, length = 100)

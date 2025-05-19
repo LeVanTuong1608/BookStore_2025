@@ -30,6 +30,11 @@ public class DiscountDTO {
         this.endDate = endDate;
     }
 
+    // Builder pattern implementation
+    public static Builder builder() {
+        return new Builder();
+    }
+
     // Getters and Setters
     public int getDiscountId() {
         return discountId;
@@ -43,7 +48,7 @@ public class DiscountDTO {
         return title;
     }
 
-    public void setTile(String title) {
+    public void setTille(String title) {
         this.title = title;
     }
 
@@ -94,4 +99,75 @@ public class DiscountDTO {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    public static class Builder {
+        private int discountId;
+        private String discountName;
+        private String discountCode;
+        private String title;
+        private Long bookId;
+        private BigDecimal minOrderAmount;
+        private Date startDate;
+        private Date endDate;
+
+        public Builder discountId(int discountId) {
+            this.discountId = discountId;
+            return this;
+        }
+
+        public Builder discountName(String discountName) {
+            this.discountName = discountName;
+            return this;
+        }
+
+        public Builder discountCode(String discountCode) {
+            this.discountCode = discountCode;
+            return this;
+        }
+
+        public Builder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder bookId(Long bookId) {
+            this.bookId = bookId;
+            return this;
+        }
+
+        public Builder minOrderAmount(BigDecimal minOrderAmount) {
+            this.minOrderAmount = minOrderAmount;
+            return this;
+        }
+
+        public Builder startDate(Date startDate) {
+            this.startDate = startDate;
+            return this;
+        }
+
+        public Builder endDate(Date endDate) {
+            this.endDate = endDate;
+            return this;
+        }
+
+        public DiscountDTO build() {
+            return new DiscountDTO(discountId, discountName, discountCode, bookId, title, minOrderAmount, startDate,
+                    endDate);
+        }
+    }
+
+    // @Override
+    // public String toString() {
+    // return "DiscountDTO{" +
+    // "discountId=" + discountId +
+    // ", discountName='" + discountName + '\'' +
+    // ", discountCode='" + discountCode + '\'' +
+    // ", title='" + title + '\'' +
+    // ", bookId=" + bookId +
+    // ", minOrderAmount=" + minOrderAmount +
+    // ", startDate=" + startDate +
+    // ", endDate=" + endDate +
+    // '}';
+    // }
+
 }

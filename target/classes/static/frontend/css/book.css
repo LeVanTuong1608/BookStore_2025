@@ -1,0 +1,22 @@
+.book-detail {
+    width: 80%;
+    margin: 20px auto;
+    background: #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.book-detail img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+.book-detail {
+    justify-items: right;
+}
+.book-detail button {
+    background: #66CC33;
+    display: block;
+    width: 20%;
+    margin-top: 10px;
+}
